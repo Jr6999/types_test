@@ -1,9 +1,27 @@
-import 'package:types_test/types_test.dart' as types_test;
-
 void main(List<String> arguments) {
+  final distance = 8.75;
+  final nombreColis = 0;
+  final nom = "Abdoulaye";
+  final heure= DateTime.now();
+  const prix = 2500.50;
+  const prixColis = 1500.00;
+
+  if (nombreColis > 0) {
+    print("Mr/Mme $nom,");
+    print("Le transport vous coutera: ${distance * prix} FCFA");
+    print("Le transport de votre colis vous coutera: ${prixColis*nombreColis} FCFA");
+    print("Merci pour la confiance\n $heure");
+  } else {
+    print("Mr/Mme $nom,");
+    print("Le transport vous coutera: ${distance * prix} FCFA");
+    print("Merci pour la confiance\n $heure");
+  }
+  
+
+
 
 // Déclaration de différentes variables de types primitives
-  int nbre = 10;
+  /*int nbre = 10;
   String nom = "Codjo";
   double pi = 3.14;
   bool isTrue = true;
@@ -23,6 +41,7 @@ void main(List<String> arguments) {
   print("Le message est: $message");
   print("La valeur de isValid est: $isValid");
   print("Le trajet est: $trajet KM");
+  */
 /*
 //les erreurs de types
   int distanceErreur = 8.75;          
