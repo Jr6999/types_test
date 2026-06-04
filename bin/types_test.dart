@@ -6,9 +6,9 @@ void main(List<String> arguments) {
   final nom = "Abdoulaye";
   final isDaytime = true;
   final heure= DateTime.now();
-  const tarifJour = 500.50;
-  const tarifNuit = 800.50;
-  const prixColis = 1500.00;
+  const tarifJour = 200.5;
+  const tarifNuit = 300.5;
+  const prixColis = 150.00;
 
   if (nombreColis > 0) {
     print("Mr/Mme $nom,");
@@ -37,9 +37,9 @@ final heure = DateTime.now();
 
 // Les tarifs fixes appliqués selon le moment de la journée
 // ainsi que le coût unitaire du transport d'un colis.
-const tarifJour = 500.50;
-const tarifNuit = 800.50;
-const prixColis = 1500.00;
+const tarifJour = 200.5;
+const tarifNuit = 300.5;
+const prixColis = 150.0;
 
 // Codes ANSI utilisés pour améliorer la lisibilité
 // des messages affichés dans le terminal.
@@ -60,9 +60,11 @@ stdout.write("Entrez le moment de la journée (jour/nuit): ");
 final moment = stdin.readLineSync()!.toLowerCase();
 
 // Présentation des tarifs appliqués avant validation.
-print("Le kilomètre en jour est de $tarifJour FCFA");
-print("Le kilomètre en nuit est de $tarifNuit FCFA");
-print("Le prix du colis est de $prixColis FCFA");
+print("$jaune Le kilomètre en jour est de $tarifJour FCFA$reset");
+print("$jaune Le kilomètre en nuit est de $tarifNuit FCFA$reset");
+if (nombreColis > 0) {
+  print("$jaune Le prix d'un colis est de $prixColis FCFA$reset");
+}
 
 // Demande de confirmation avant le traitement définitif de la course.
 stdout.write(
@@ -81,7 +83,7 @@ if (validation == 'y') {
     );
   } else if (moment == 'nuit') {
     print(
-      "$jaune Le transport vous coutera: ${distance * tarifNuit} FCFA$reset",
+      "$vert Le transport vous coutera: ${distance * tarifNuit} FCFA$reset",
     );
   } else {
     // Arrêt du programme en cas de valeur non reconnue.
