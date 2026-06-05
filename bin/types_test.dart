@@ -36,6 +36,7 @@ final heure = DateTime.now();
 double coutTrajet=0 ;
 double coutColis=0 ;
 double total=0 ;
+String nom="";
 
 // Les tarifs fixes appliqués selon le moment de la journée
 // ainsi que le coût unitaire du transport d'un colis.
@@ -51,18 +52,18 @@ const String vert = '\x1B[32m';
 const String jaune = '\x1B[33m';
 
 
-stdout.write("$vert Bienvenue chez HKNExpress!$reset\n");
+stdout.write("$vert --------------------Bienvenue chez HKNExpress!--------------------$reset\n");
 stdout.write("Veuillez fournir les informations suivantes pour votre course:\n");
 
 // Récupération des informations 
 
-stdout.write("Entrez votre nom: ");
-final nom = stdin.readLineSync()!;
-if (nom.trim().isEmpty) {
-  print("$rouge Veuillez entrer votre nom $reset");
-  return;
-}
-
+do{
+  stdout.write("Entrez votre nom: ");
+   nom = stdin.readLineSync()!;
+  if (nom.trim().isEmpty) {
+    print("$rouge Veuillez entrer votre nom $reset");
+  }
+} while (nom.trim().isEmpty);
 
 stdout.write("Entrez la distance du trajet en KM: ");
 final distance = double.parse(stdin.readLineSync()!);
