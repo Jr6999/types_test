@@ -36,7 +36,6 @@ final heure = DateTime.now();
 double coutTrajet=0 ;
 double coutColis=0 ;
 double total=0 ;
-String nom="";
 
 // Les tarifs fixes appliqués selon le moment de la journée
 // ainsi que le coût unitaire du transport d'un colis.
@@ -57,13 +56,13 @@ stdout.write("Veuillez fournir les informations suivantes pour votre course:\n")
 
 // Récupération des informations 
 
-do{
   stdout.write("Entrez votre nom: ");
-   nom = stdin.readLineSync()!;
+   final nom = stdin.readLineSync()!;
   if (nom.trim().isEmpty) {
     print("$rouge Veuillez entrer votre nom $reset");
+    return;
   }
-} while (nom.trim().isEmpty);
+
 
 stdout.write("Entrez la distance du trajet en KM: ");
 final distance = double.parse(stdin.readLineSync()!);
