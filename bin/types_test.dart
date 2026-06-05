@@ -31,9 +31,11 @@ void main(List<String> arguments) {
   
 */
 
-// Informations relatives au client et à la date de la demande.
-final nom = "Abdoulaye";
+// Informations relatives à la date de la demande.
 final heure = DateTime.now();
+double coutTrajet=0 ;
+double coutColis=0 ;
+double total=0 ;
 
 // Les tarifs fixes appliqués selon le moment de la journée
 // ainsi que le coût unitaire du transport d'un colis.
@@ -48,16 +50,41 @@ const String rouge = '\x1B[31m';
 const String vert = '\x1B[32m';
 const String jaune = '\x1B[33m';
 
-// Récupération des informations nécessaires au calcul
-// du coût de la course et du transport des colis.
+
+stdout.write("$vert Bienvenue chez HKNExpress!$reset\n");
+stdout.write("Veuillez fournir les informations suivantes pour votre course:\n");
+
+// Récupération des informations 
+
+stdout.write("Entrez votre nom: ");
+final nom = stdin.readLineSync()!;
+if (nom.trim().isEmpty) {
+  print("$rouge Veuillez entrer votre nom $reset");
+  return;
+}
+
+
 stdout.write("Entrez la distance du trajet en KM: ");
 final distance = double.parse(stdin.readLineSync()!);
+if (distance < 0) {
+  print("$rouge La distance ne peut pas être négative. $reset");
+  return;
+}
+
 
 stdout.write("Entrez le nombre de colis à transporter: ");
 final nombreColis = int.parse(stdin.readLineSync()!);
+if(nombreColis < 0){
+  print("$rouge Le nombre de colis ne peut pas être négatif. $reset");
+  return;
+}
 
 stdout.write("Entrez le moment de la journée (jour/nuit): ");
 final moment = stdin.readLineSync()!.toLowerCase();
+if(moment != "jour" && moment != "nuit"){
+  print("$rouge Moment de la journée invalide. Veuillez entrer 'jour' ou 'nuit'. $reset");
+  return;
+}
 
 // Présentation des tarifs appliqués avant validation.
 print("$jaune Le kilomètre en jour est de $tarifJour FCFA$reset");
@@ -73,34 +100,31 @@ stdout.write(
 
 final validation = stdin.readLineSync()!.toLowerCase();
 
-if (validation == 'y') {
-  print("$vert \nMr/Mme $nom,$reset");
 
+ if(nombreColis >0){
+  coutColis=prixColis*nombreColis;
+}
   // Application du tarif correspondant au moment choisi.
-  if (moment == 'jour') {
-    print(
-      "$vert Le transport vous coutera: ${distance * tarifJour} FCFA$reset",
-    );
-  } else if (moment == 'nuit') {
-    print(
-      "$vert Le transport vous coutera: ${distance * tarifNuit} FCFA$reset",
-    );
-  } else {
-    // Arrêt du programme en cas de valeur non reconnue.
-    print(
-      "$rouge Moment de la journée invalide. Veuillez entrer 'jour' ou 'nuit'. $reset",
-    );
-    return;
-  }
+if(moment=="jour"){
+  coutTrajet=distance*tarifJour;
+}else if(moment=="nuit"){
+  coutTrajet=distance*tarifNuit;
+}
 
-  // Facturation supplémentaire uniquement lorsqu'au moins
+total=coutTrajet+coutColis;
+
+if (validation == 'y') {
+  print("$vert \n=== REÇU OFFICIEL DE LA COURSE ===\n$reset");
+  print("$vert Mr/Mme $nom,$reset");
+  print("$vert Votre course vous coutera: $coutTrajet FCFA$reset");
+    // Facturation supplémentaire uniquement lorsqu'au moins
   // un colis est déclaré.
   if (nombreColis > 0) {
-    print(
-      "$vert Le transport de votre colis vous coutera: ${prixColis * nombreColis} FCFA $reset",
-    );
+    print("$vert Le transport de votre colis vous coutera: $coutColis FCFA$reset");
   }
 
+
+  print("$vert Total de la course: $total FCFA$reset");
   // Confirmation finale de la prise en charge de la course.
   print("$vert Merci pour la confiance\n $heure$reset");
 } else {
